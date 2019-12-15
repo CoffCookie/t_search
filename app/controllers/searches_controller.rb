@@ -7,6 +7,10 @@ class SearchesController < ApplicationController
     @searches = Search.all
   end
 
+  def search_index
+
+  end
+
   # GET /searches/1
   # GET /searches/1.json
   def show

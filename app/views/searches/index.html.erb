@@ -1,6 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Searches</h1>
+<h1>Search Engine</h1>
+
+<%= form_with url: "searches/search_index", local: true do |form| %>
+  <div class="field">
+    <%= form.text_field :search %>
+    <%= form.submit value="検索" %>
+  </div>
+<% end %>
 
 <table>
   <thead>
@@ -20,9 +27,6 @@
         <td><%= search.title %></td>
         <td><%= search.url %></td>
         <td><%= search.description %></td>
-        <td><%= link_to 'Show', search %></td>
-        <td><%= link_to 'Edit', edit_search_path(search) %></td>
-        <td><%= link_to 'Destroy', search, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -30,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Search', new_search_path %>
+<%= link_to 'サイト登録', new_search_path %>
