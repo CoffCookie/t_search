@@ -8,6 +8,8 @@ class SearchesController < ApplicationController
   end
 
   def search_index
+    @searches = Search.all
+    @search_data = params[:search]
 
   end
 
