@@ -10,7 +10,6 @@ class SearchesController < ApplicationController
   def search_index
     @searches = Search.all
     @search_data = params[:search]
-
   end
 
   # GET /searches/1
@@ -31,9 +30,10 @@ class SearchesController < ApplicationController
   # POST /searches.json
   def create
     @search = Search.new(search_params)
+    data_acquisition
 
     respond_to do |format|
-      if @search.save
+      if @search.save!
         format.html { redirect_to @search, notice: 'Search was successfully created.' }
         format.json { render :show, status: :created, location: @search }
       else
@@ -76,5 +76,24 @@ class SearchesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def search_params
       params.require(:search).permit(:category, :title, :url, :description)
+    end
+
+    #title,description scraping
+    def data_acquisition
+      require 'open-uri'
+      require 'nokogiri'
+
+      charset = nil
+      begin
+        open(@search.url) { |io|
+          charset = io.charset
+        }
+        doc = Nokogiri::HTML(open(@search.url),nil,charset)
+        @search.title = doc.title
+        @search.description = doc.xpath('/html/head/meta[@name="description"]/@content').to_s
+      rescue => e
+        puts "urlが正しくありません。"
+        puts e
+      end
     end
 end

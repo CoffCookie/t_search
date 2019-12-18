@@ -1,3 +1,4 @@
 class Search < ApplicationRecord
-    validates :search, presence: true
+    validates :category, presence: true
+    validates :url, presence: true
 end
