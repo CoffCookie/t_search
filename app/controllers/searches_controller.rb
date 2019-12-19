@@ -30,6 +30,7 @@ class SearchesController < ApplicationController
   # POST /searches.json
   def create
     @search = Search.new(search_params)
+    begin
     data_acquisition
 
     respond_to do |format|
@@ -41,6 +42,12 @@ class SearchesController < ApplicationController
         format.json { render json: @search.errors, status: :unprocessable_entity }
       end
     end
+    rescue => e
+      flash[:notice] = "urlが正しくありません。"
+      puts e
+      redirect_to(new_search_path)
+    end
+
   end
 
   # PATCH/PUT /searches/1
@@ -84,16 +91,13 @@ class SearchesController < ApplicationController
       require 'nokogiri'
 
       charset = nil
-      begin
+      
         open(@search.url) { |io|
           charset = io.charset
         }
         doc = Nokogiri::HTML(open(@search.url),nil,charset)
         @search.title = doc.title
         @search.description = doc.xpath('/html/head/meta[@name="description"]/@content').to_s
-      rescue => e
-        puts "urlが正しくありません。"
-        puts e
-      end
+      
     end
 end
