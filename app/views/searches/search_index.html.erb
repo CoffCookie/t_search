@@ -1,1 +1,8 @@
 <%= @search_data %>
+
+<% @search_result.each do |result| %>
+    <%= result.category %><br>
+    <%= result.title %><br>
+    <a href="<%= result.url %>"><%= result.url %></a><br>
+    <%= result.description %><br>
+<% end %>

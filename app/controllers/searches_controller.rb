@@ -1,5 +1,6 @@
 class SearchesController < ApplicationController
   before_action :set_search, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery except: :search
 
   # GET /searches
   # GET /searches.json
@@ -10,11 +11,14 @@ class SearchesController < ApplicationController
   def search_index
     @searches = Search.all
     @search_data = params[:search]
+    @search_result = Search.where(title: @search_data).or(Search.where(description: @search_data))
+    
   end
 
   # GET /searches/1
   # GET /searches/1.json
   def show
+
   end
 
   # GET /searches/new
