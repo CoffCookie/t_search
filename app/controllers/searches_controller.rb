@@ -11,8 +11,34 @@ class SearchesController < ApplicationController
   def search_index
     @searches = Search.all
     @search_data = params[:search]
-    @search_result = Search.where(title: @search_data).or(Search.where(description: @search_data))
-    
+    title_result = nil
+    description_result = nil
+
+    p "@searches="
+    p @searches
+    @search_result = nil
+
+    @searches.each do |search|
+      if !search.title.match(/.*#{@search_data}.*/).nil? 
+        title_result = search.title.match(/.*#{@search_data}.*/)
+        p "title"
+        p title_result
+        break
+      elsif !search.description.match(/.*#{@search_data}.*/).nil?
+        description_result = search.description.match(/.*#{@search_data}.*/)
+        p "description"
+        p description_result 
+        break
+      end
+    end
+
+    if !title_result.nil?
+      @search_result = Search.where(title: title_result[0])
+    elsif !description_result.nil?
+      @search_result = Search.where(description: description_result[0])
+    else
+      @unsearch_result = "見つかりませんでした。"
+    end
   end
 
   # GET /searches/1

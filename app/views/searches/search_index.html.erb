@@ -1,8 +1,12 @@
-<%= @search_data %>
+<%= @search_data %><br>
 
-<% @search_result.each do |result| %>
-    <%= result.category %><br>
-    <%= result.title %><br>
-    <a href="<%= result.url %>"><%= result.url %></a><br>
-    <%= result.description %><br>
+<% if !@search_result.blank? %>
+    <% @search_result.each do |result| %>
+        <%= result.category %><br>
+        <%= result.title %><br>
+        <a href="<%= result.url %>"><%= result.url %></a><br>
+        <%= result.description %><br>
+    <% end %>
+<% else %>
+    <%= @unsearch_result %>
 <% end %>
