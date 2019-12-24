@@ -73,7 +73,7 @@ class SearchesController < ApplicationController
       end
     end
     rescue => e
-      flash[:notice] = "urlが正しくありません。"
+      flash[:notice] = e
       puts e
       redirect_to(new_search_path)
     end
