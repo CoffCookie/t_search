@@ -1,11 +1,11 @@
-<%= @search_data %><br>
+<%= @search_data %><br><br>
 
 <% if !@search_result.blank? %>
     <% @search_result.each do |result| %>
         <%= result.category %><br>
         <%= result.title %><br>
         <a href="<%= result.url %>"><%= result.url %></a><br>
-        <%= result.description %><br>
+        <%= result.description %><br><br>
     <% end %>
 <% else %>
     <%= @unsearch_result %>
