@@ -17,6 +17,8 @@ class SearchesController < ApplicationController
       if !search.title.match(/.*#{@search_data}.*/).nil? ||
           !search.description.match(/.*#{@search_data}.*/).nil?
         @search_result.push(search)
+      else
+        @unsearch_result = "見つかりませんでした。"
       end
     end
   end
