@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :category %>
-    <%= form.collection_select :category, Search.all, :id,:category, :prompt => "カテゴリを選択"%>
+    <%= form.collection_select :category, Category.all, :id,:category, :prompt => "カテゴリ選択"%>
   </div>
 
   <div class="field">

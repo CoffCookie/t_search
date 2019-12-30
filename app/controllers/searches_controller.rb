@@ -42,6 +42,7 @@ class SearchesController < ApplicationController
   # POST /searches.json
   def create
     @search = Search.new(search_params)
+
     begin
     data_acquisition
 
@@ -59,7 +60,6 @@ class SearchesController < ApplicationController
       puts e
       redirect_to(new_search_path)
     end
-
   end
 
   # PATCH/PUT /searches/1
@@ -96,7 +96,7 @@ class SearchesController < ApplicationController
     def search_params
       params.require(:search).permit(:category, :title, :url, :description)
     end
-
+    
     #title,description scraping
     def data_acquisition
       require 'open-uri'
@@ -110,6 +110,5 @@ class SearchesController < ApplicationController
         doc = Nokogiri::HTML(open(@search.url),nil,charset)
         @search.title = doc.title
         @search.description = doc.xpath('/html/head/meta[@name="description"]/@content').to_s
-      
     end
 end
