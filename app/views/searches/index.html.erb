@@ -1,37 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Search Engine</h1>
-
-<%= form_with url: "searches/search_index", local: true do |form| %>
-  <div class="field">
-    <%= form.text_field :search %>
-    <%= form.submit value="検索" %>
-  </div>
+<% if !notice.nil? %>
+  <p id="notice"><%= notice %></p>
 <% end %>
+<%= render 'part_common/search_text_field' %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Title</th>
-      <th>Url</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @searches.each do |search| %>
-      <tr>
-        <td><%= search.category %></td>
-        <td><%= search.title %></td>
-        <td><a href="<%= search.url %>"><%= search.url %></a></td>
-        <td><%= search.description %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'サイト登録', new_search_path %>

@@ -1,11 +1,14 @@
-<p><div class="errmessage"><%= flash[:notice] %></div></p>
-<%= form_with(model: @category, local: true) do |form| %>
-  <div class="field">
-    <%= form.label :category %>
-    <%= form.text_field :category %>
-  </div>
+<div class= "base_layout">
+  <h1>カテゴリ登録</h1>
+  <p><div class="errmessage"><%= flash[:notice] %></div></p>
+  <%= form_with(model: @category, local: true) do |form| %>
+    <div class="field">
+      <%= form.label :category %>
+      <%= form.text_field :category %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>

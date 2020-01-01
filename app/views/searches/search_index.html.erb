@@ -1,12 +1,14 @@
-<%= @search_data %><br><br>
+<%= render 'part_common/search_text_field' %>
 
-<% if !@search_result.blank? %>
-    <% @search_result.each do |result| %>
-        <%= result.category %><br>
-        <%= result.title %><br>
-        <a href="<%= result.url %>"><%= result.url %></a><br>
-        <%= result.description %><br><br>
+<div class= "base_layout">
+    <% if !@search_result.blank? %>
+        <% @search_result.each do |result| %>
+            <%= result.category %><br>
+            <%= result.title %><br>
+            <a href="<%= result.url %>"><%= result.url %></a><br>
+            <%= result.description %><br><br>
+        <% end %>
+    <% else %>
+        <%= @unsearch_result %>
     <% end %>
-<% else %>
-    <%= @unsearch_result %>
-<% end %>
+</div>

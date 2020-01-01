@@ -8,8 +8,19 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= yield %>
+    <header>
+      <nav>
+        <div class = "logo">
+            Search Engine
+        </div>
+        <div class = "menu">
+            <ul>
+                <li><%= link_to 'サイト登録', new_search_path %></li>
+            </ul>
+        </div>
+      </nav>
+    </header>
+      <%= yield %>
   </body>
 </html>
