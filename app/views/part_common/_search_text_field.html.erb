@@ -1,6 +1,10 @@
 <div class = "search_text_field">
     <%= form_with url: searches_search_index_path, local: true do |form| %>
     <div class="field">
+        <%= form.label :category %>
+        <%= form.collection_select :category, Category.all, :category,:category, :prompt => "カテゴリ選択"%>
+    </div>
+    <div class="field">
     <% if @search_data.nil? %>
         <%= form.text_field :search %>
     <% else %>

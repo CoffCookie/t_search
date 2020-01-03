@@ -11,8 +11,13 @@ class SearchesController < ApplicationController
   def search_index
     @searches = Search.all
     @search_data = params[:search]
+    @category_data = params[:category]
     @search_result = Array.new
 
+    if @category_data.present?
+      @searches = Search.where(category: @category_data)
+    end
+    
     @searches.each do |search|
       if !search.title.match(/.*#{@search_data}.*/).nil? ||
           !search.description.match(/.*#{@search_data}.*/).nil?
