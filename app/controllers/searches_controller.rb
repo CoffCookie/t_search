@@ -13,18 +13,26 @@ class SearchesController < ApplicationController
     @search_data = params[:search]
     @category_data = params[:category]
     @search_result = Array.new
-
+  
     if @category_data.present?
       @searches = Search.where(category: @category_data)
     end
-    
-    @searches.each do |search|
-      if !search.title.match(/.*#{@search_data}.*/).nil? ||
-          !search.description.match(/.*#{@search_data}.*/).nil?
-        @search_result.push(search)
-      else
-        @unsearch_result = "見つかりませんでした。"
+
+    if @search_data.present? 
+      @search_data = @search_data.split(/[[:blank:]]+/)
+      p @search_data
+      @searches.each do |search|
+        @search_data.each do |search_word|
+          if !search.title.match(/.*#{search_word}.*/i).nil? ||
+              !search.description.match(/.*#{search_word}.*/i).nil?
+            @search_result.push(search)
+          else
+            @unsearch_result = "見つかりませんでした。"
+          end
+        end
       end
+    else
+      @search_result = @searches
     end
   end
 
