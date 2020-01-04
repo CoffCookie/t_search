@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   post "searches/search_index" => "searches#search_index"
+  get "searches/search_index" => "searches#search_index"
   resources :searches
 
   resources :categories
