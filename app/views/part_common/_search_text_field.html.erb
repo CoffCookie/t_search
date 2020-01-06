@@ -1,16 +1,38 @@
 <div class = "search_text_field">
     <%= form_with url: searches_search_index_path, local: true do |form| %>
+    <% if @category_data.blank? %> 
+        <div class="field">
+            <%= form.label :category %>
+            <%= form.collection_select :category, Category.all, :category,:category, :prompt => "カテゴリ選択"%>
+        </div>
+    <% else %>
+        <div class="field">
+            <%= form.label :category %>
+            <%= form.collection_select :category, Category.all, :category,:category, selected: @category_data, :prompt => "カテゴリ選択"%>
+        </div>
+    <% end %>
     <div class="field">
-        <%= form.label :category %>
-        <%= form.collection_select :category, Category.all, :category,:category, :prompt => "カテゴリ選択"%>
+        <% if @search_data.nil? %>
+            <%= form.text_field :search %>
+        <% else %>
+            <%= form.text_field :search, value: @search_data %>
+        <% end %>
+        <%= form.submit value="検索" %>
     </div>
     <div class="field">
-    <% if @search_data.nil? %>
-        <%= form.text_field :search %>
-    <% else %>
-        <%= form.text_field :search, value: @search_data %>
-    <% end %>
-        <%= form.submit value="検索" %>
+        <div class="radio-inline">
+            <% if @search_type.nil? || @search_type == "AND" %>
+                <%= form.radio_button :search_type, :AND, checked: "checked" %>
+                <%= form.label :search_type, "AND検索",{value: :AND, style: "display: inline-block;"} %>
+                <%= form.radio_button :search_type, :OR %>
+                <%= form.label :search_type, "OR検索",{value: :OR, style: "display: inline-block;"} %>
+            <% elsif @search_type == "OR" %>
+                <%= form.radio_button :search_type, :AND %>
+                <%= form.label :search_type, "AND検索",{value: :AND, style: "display: inline-block;"} %>
+                <%= form.radio_button :search_type, :OR , checked: "checked" %>
+                <%= form.label :search_type, "OR検索",{value: :OR, style: "display: inline-block;"} %>
+            <% end %>
+        </div>
     </div>
     <% end %>
 </div>

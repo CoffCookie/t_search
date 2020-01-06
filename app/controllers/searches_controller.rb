@@ -12,26 +12,52 @@ class SearchesController < ApplicationController
     @searches = Search.all
     @search_data = params[:search]
     @category_data = params[:category]
+    @search_type = params[:search_type]
     @search_result = Array.new
+    count = 0
   
     if @category_data.present?
       @searches = Search.where(category: @category_data)
     end
 
-    if @search_data.present? 
+    if @search_data.present?
       @search_data = @search_data.split(/[[:blank:]]+/)
-      p @search_data
-      @searches.each do |search|
-        @search_data.each do |search_word|
-          if !search.title.match(/.*#{search_word}.*/i).nil? ||
-              !search.description.match(/.*#{search_word}.*/i).nil?
-            @search_result.push(search)
-          else
-            @unsearch_result = "見つかりませんでした。"
+
+      # AND検索
+      if @search_type == "AND"
+        @searches.each do |search|
+          count = 0
+          @search_data.each do |search_word|
+            if !search.title.match(/.*#{search_word}.*/i).nil? ||
+                !search.description.match(/.*#{search_word}.*/i).nil?
+              count = count + 1
+            end
+            if @search_data.count == count
+              @search_result.push(search)
+            end
+          end
+        end
+        if @search_result.count == 0
+          @unsearch_result = "見つかりませんでした。"
+        end
+      # OR検索
+      elsif @search_type == "OR"
+        @searches.each do |search|
+          @search_data.each do |search_word|
+            if !search.title.match(/.*#{search_word}.*/i).nil? ||
+                !search.description.match(/.*#{search_word}.*/i).nil?
+              @search_result.push(search)
+              break
+            else
+              @unsearch_result = "見つかりませんでした。"
+            end
           end
         end
       end
+
     else
+      # 検索文字がない場合は、カテゴリによる絞り込みがされていたらカテゴリ。
+      # 何もなければ全てのデータが表示される。
       @search_result = @searches
     end
   end
