@@ -12,7 +12,7 @@
 
 <p>
   <strong>Url:</strong>
-  <a href="<%= @search.url %>”><%= @search.url %></a>
+  <%= link_to @search.url, @search.url %>
 </p>
 
 <p>
@@ -20,5 +20,5 @@
   <%= @search.description %>
 </p>
 
-<%= link_to 'Edit', edit_search_path(@search) %> |
+<%= link_to 'Edit', edit_search_path(@search) %> 
 <%= link_to 'Back', searches_path %>
