@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   post "searches/search_index" => "searches#search_index"
   get "searches/search_index" => "searches#search_index"
   resources :searches

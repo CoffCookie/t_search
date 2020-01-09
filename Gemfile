@@ -62,3 +62,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #nokogiri
 gem 'nokogiri', '~> 1.10', '>= 1.10.7'
+
+gem 'devise'
