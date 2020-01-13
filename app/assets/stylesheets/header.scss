@@ -12,6 +12,10 @@ ul {
     align-items: center;
 }
 
+.ko_menu {
+    margin-left: 20px;
+}
+
 .logo {
     font-size: 2em;
     color: #fff;
@@ -23,6 +27,11 @@ ul {
     color: #fff;
 }
 
+.logo a:link {
+    text-decoration: none;
+    color: #fff;
+}
+
 .logo a:visited {
     text-decoration: none;
     color: #fff;
@@ -30,6 +39,14 @@ ul {
 
 .menu {
     padding-right: 10px;
+    color: #fff;
+}
+
+.menu a {
+    color: #fff;
+}
+
+.menu a:link {
     color: #fff;
 }
 
