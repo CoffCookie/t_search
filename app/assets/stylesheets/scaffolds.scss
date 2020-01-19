@@ -1,12 +1,12 @@
 body {
   background-color: #fff;
   color: #333;
-}
+  margin: 33px; }
 
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
-}
+  line-height: 18px; }
 
 pre {
   background-color: #eee;
@@ -63,17 +63,3 @@ div.actions {
 
 label {
   display: block; }
-
-  button {
-    /* 文字サイズを1.4emに指定 */
-    font-size: 0.7em;
-
-    /* 角丸の指定 */
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-}
-
-
-
-
